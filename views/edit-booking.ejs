@@ -1,0 +1,51 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <h1 align=" center">Edit Booking</h1>
+    <form align=" center" action="/update-booking" method="POST">
+        <label for="name">Select Customer:</label>
+        <select name="name" id="name">
+            <% 
+            for(let a of customer){ %>
+                <option>
+                    <%=
+                        
+                        a.dataValues.name;
+                    %>
+                </option>
+                <% } %>
+        </select>
+        <br>
+        <br>
+        <label for="location">Select Location:</label>
+        <select name="location" id="location">
+            <% 
+            for(let a of location){ %>
+                <option>
+                    <%=
+                        
+                        a.dataValues.name;
+                    %>
+                </option>
+                <% } %>
+        </select>
+        <br><br>
+        <label for="shotType">Select shotType:</label>
+        <select name="shotType" id="shotType">
+            <% 
+            for(let a of shotType){ %>
+                <option>
+                    <%=
+                        
+                        a.dataValues.name;
+                    %>
+                </option>
+                <% } %>
+        </select>
+        <br><br>
+        <input  name="id" type="hidden" value=<%= id %> </input>
+        <button type="btn">Save</button>
+    </form>
+      
+
+<%- include('includes/end.ejs') %>

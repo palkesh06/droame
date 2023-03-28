@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <title>Home Page</title>
+</head>
+
+<body>
+
+    <p>To Add New Customer Click Here : <button href="/add-customer"> Add Customer </button></p>
+    <a href="/add-location">
+        <p align="right"> Add Location</p>
+    </a>
+    <a href="/add-shot-type">
+        <p align="right"> Add Dron Shot Type</p>
+    </a>
+    <br>
+    <p>To View All Customers Click Here : <a href="/get-customers"> View All Customers </a> </p>
+    <h1 align="center">All Bookings:</h1>
+    <form action="/edit-booking/" method="POST">
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+        </style>
+        <table align="center">
+            <tr>
+                <th>BookingId</th>
+                <th>CustomerName</th>
+                <th>CreatedAt</th>
+                <th>CustomerId </th>
+                <th>LocationId </th>
+                <th>ShotTypeId </th>
+                <th colspan="2">Options</th>
+            </tr>
+            <% for ( let a of booking){%>
+                <tr>
+                    <td align="center">
+                        <%=a.dataValues.booking_id %>
+                    </td>
+                    <td align="center">
+                        <%=a.dataValues.customer_name %>
+                    </td>
+                    <td align="center">
+                        <%=a.dataValues.createdAt %>
+                    </td>
+                    <td align="center">
+                        <%=a.dataValues.customerId %>
+                    </td>
+                    <td align="center">
+                        <%=a.dataValues.locationId %>
+                    </td>
+                    <td align="center">
+                        <%=a.dataValues.shotTypeId %>
+                    </td>
+                    <td><button name="edit_id" type="submit" value=<%=a.dataValues.booking_id %>>Edit</button></td>
+                    <td><button name="delete_id" type="submit" value=<%=a.dataValues.booking_id %>>Delete</button></td>
+
+                </tr>
+                <% } %>
+        </table>
+    </form>
+    <p>To Create or Add new booking click here : <a href="/add-booking"> Add Booking </a> </p>
+</body>
+
+</html>

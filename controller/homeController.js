@@ -3,18 +3,12 @@ const Location = require("../Models/Location");
 const ShotType = require("../Models/ShotType");
 const Booking = require("../Models/Bookings");
 
-
-
-
-exports.getHomePage = (req, res, next) => {
-  res.send(
-    '<nav> <center><a href="/add-customer"> Add Customer </a></center> <a href="/add-location"> <p align="right"> Add Location</p> </a> <a href="/add-shot-type"> <p align="right"> Add Dron Shot Type</p> </a><a href="/add-booking"> Add Booking </a> <br><a href="/get-customers"> View All Customers </a>'
-  );
+exports.getHomePage = async (req, res, next) => {
+  const bookings = await Booking.findAll();
+  res.render("home-page", {
+    booking: bookings,
+  });
 };
-
-
-
-
 
 exports.addBooking = async (req, res, next) => {
   const cust = await Customer.findAll({ attributes: ["name"] });
@@ -43,11 +37,6 @@ exports.postBooking = async (req, res, next) => {
     where: { name: name },
     attributes: ["id"],
   });
-  console.log(
-    customer_id[0].dataValues.id,
-    location_id[0].dataValues.id,
-    shotType_id[0].dataValues.id
-  );
   Booking.create({
     customer_name: name,
     locationId: location_id[0].dataValues.id,
@@ -56,10 +45,51 @@ exports.postBooking = async (req, res, next) => {
   });
   res.redirect("/home");
 };
-
-
-
-
+exports.editBooking = async (req, res, next) => {
+  const edit_id = req.body.edit_id;
+  const delete_id = req.body.delete_id;
+  if (edit_id && delete_id === undefined) {
+    const cust = await Customer.findAll({ attributes: ["name"] });
+    const loc = await Location.findAll({ attributes: ["name"] });
+    const st = await ShotType.findAll({ attributes: ["name"] });
+    res.render("edit-booking", {
+      pageTitle: "Edit Booking",
+      id: edit_id,
+      customer: cust,
+      location: loc,
+      shotType: st,
+    });
+  } else {
+    Booking.destroy({ where: { booking_id: delete_id } })
+      .then(() => res.redirect("/home"))
+      .catch((err) => console.log(err));
+  }
+};
+exports.updateBooking = async (req, res, next) => {
+  const custId = await Customer.findAll(
+    { where: { name: req.body.name } },
+    { attributes: ["id"] }
+  );
+  const locId = await Location.findAll(
+    { where: { name: req.body.location } },
+    { attributes: ["id"] }
+  );
+  const shotId = await ShotType.findAll(
+    { where: { name: req.body.shotType } },
+    { attributes: ["id"] }
+  );
+  Booking.update(
+    {
+      customer_name: req.body.name,
+      customerId: custId[0].dataValues.id,
+      locationId: locId[0].dataValues.id,
+      shotTypeId: shotId[0].dataValues.id,
+    },
+    { where: { booking_id: req.body.id } }
+  )
+    .then((result) => res.redirect("/home"))
+    .catch((err) => console.log(err));
+};
 
 exports.addCustomer = (req, res, next) => {
   res.render("add-customer", {
@@ -109,9 +139,6 @@ exports.updateCustomer = async (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-
-
-
 exports.addLocation = (req, res, next) => {
   res.render("add-location", {
     pageTitle: "Add Location",
@@ -123,9 +150,6 @@ exports.postLocation = (req, res, next) => {
   res.redirect("/home");
 };
 
-
-
-
 exports.addShotType = (req, res, next) => {
   res.render("add-shot-type", {
     pageTitle: "Add Shot-Type",
@@ -136,8 +160,6 @@ exports.postShotType = (req, res, next) => {
   ShotType.create({ name: shotType });
   res.redirect("/home");
 };
-
-
 
 exports.get404 = (req, res, next) => {
   res.status(404).render("404", { pageTitle: "Page Not Found", path: "/404" });

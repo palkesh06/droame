@@ -9,7 +9,6 @@ const Booking = require('../droame/Models/Bookings');
 const Customer = require('../droame/Models/Customer');
 const Location = require('../droame/Models/Location');
 const ShotType = require('../droame/Models/ShotType');
-const { loadavg } = require("os");
 
 const app = express();
 
@@ -25,6 +24,8 @@ app.use("/home", Controller.getHomePage);
 // To handle booking related operations.
 app.get('/add-booking', Controller.addBooking); 
 app.post('/add-booking', Controller.postBooking);
+app.post('/edit-booking',Controller.editBooking);
+app.post('/update-booking',Controller.updateBooking);
 
 // To handle location realated operations.
 app.get("/add-location", Controller.addLocation);
