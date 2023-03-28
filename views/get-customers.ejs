@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center">All Customer</h1>
+<form action="/edit-customer/" method="POST" >
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    <th>Options</th>
+  </tr>
+  <% for ( let a of Customers){ %>
+    <tr>
+        <td ><%=a.dataValues.id %></td>
+        <td ><%=a.dataValues.name %></td>
+        <td ><%=a.dataValues.email %></td>
+        <td ><%=a.dataValues.phoneNumber %></td>
+        <td><button name="id" type="submit" value=<%=a.dataValues.id %>>Edit</button></td>
+            
+    </tr>
+  <% } %>  
+</table>
+</form>
+</body>
+</html>

@@ -37,6 +37,9 @@ app.post("/add-shot-type", Controller.postShotType);
 // To handle customer related operations.
 app.get("/add-customer", Controller.addCustomer);
 app.post("/add-customer", Controller.postCustomer);
+app.get('/get-customers', Controller.getCustomers);
+app.use('/edit-customer/', Controller.editCustomer);
+app.post('/update-customer/', Controller.updateCustomer);
 
 // To handle 404 page.
 app.use(Controller.get404);

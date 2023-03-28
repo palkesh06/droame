@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <h1 align=" center">Edit Customer</h1>
+    <form align=" center" action="/update-customer/" method="POST">
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name" value=<%= name %> ><br><br>
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email" value=<%= email %> ><br><br>
+        <label for="phoneNumber">Phone Number</label><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" value=<%= phoneNumber %> ><br><br>
+        <input type="hidden" name="index" id="index" value=<%= index%>>
+        <button type="btn">Save</button>
+      </form>
+      
+
+<%- include('includes/end.ejs') %>
