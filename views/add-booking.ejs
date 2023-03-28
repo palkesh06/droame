@@ -2,17 +2,16 @@
     </head>
 
     <body>
+        <form action="/home" method="GET">
+            <button type="submit">Go To Home Page</button>
+        </form>
         <h1 align=" center">Add Booking</h1>
         <form align=" center" action="/add-booking" method="POST">
             <label for="name">Select Customer:</label>
             <select name="name" id="name">
-                <% 
-                for(let a of customer){ %>
+                <% for(let a of customer){ %>
                     <option>
-                        <%=
-                            
-                            a.dataValues.name;
-                        %>
+                        <%= a.dataValues.name; %>
                     </option>
                     <% } %>
             </select>
@@ -20,26 +19,18 @@
             <br>
             <label for="location">Select Location:</label>
             <select name="location" id="location">
-                <% 
-                for(let a of location){ %>
+                <% for(let a of location){ %>
                     <option>
-                        <%=
-                            
-                            a.dataValues.name;
-                        %>
+                        <%= a.dataValues.name; %>
                     </option>
                     <% } %>
             </select>
             <br><br>
             <label for="shotType">Select shotType:</label>
             <select name="shotType" id="shotType">
-                <% 
-                for(let a of shotType){ %>
+                <% for(let a of shotType){ %>
                     <option>
-                        <%=
-                            
-                            a.dataValues.name;
-                        %>
+                        <%= a.dataValues.name; %>
                     </option>
                     <% } %>
             </select>

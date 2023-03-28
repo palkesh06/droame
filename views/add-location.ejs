@@ -1,12 +1,16 @@
 <%- include('includes/head.ejs') %>
-</head>
-<body>
+  </head>
+
+  <body>
+    <form action="/home" method="GET">
+      <button type="submit">Go To Home Page</button>
+    </form>
     <h1 align=" center">Add Location</h1>
     <form align=" center" action="/add-location" method="POST">
-        <label for="location">Location</label><br>
-        <input type="text" id="location" name="location" ><br><br>
-        <button type="btn">Add</button>
-      </form>
-      
+      <label for="location">Location</label><br>
+      <input type="text" id="location" name="location"><br><br>
+      <button type="btn">Add</button>
+    </form>
 
-<%- include('includes/end.ejs') %>
+
+    <%- include('includes/end.ejs') %>
